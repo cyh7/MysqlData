@@ -14,7 +14,7 @@ class IMysqlOperate
 {
 public:
 	virtual bool ConnectDatabase() = 0;
-
+	virtual bool InsertRecordData(std::string company, std::string ad, std::string time_bg, std::string time_ed, int times) = 0;
 };
 
 
@@ -27,7 +27,8 @@ public:
 	//继承的实现
 	//连接数据库
 	bool ConnectDatabase();
-
+	//插入数据
+	bool InsertRecordData(std::string company, std::string ad, std::string time_bg, std::string time_ed, int times);
 //MySql使用的变量
 public:
 	MYSQL mysql; //mysql连接 

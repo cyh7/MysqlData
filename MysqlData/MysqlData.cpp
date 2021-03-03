@@ -8,6 +8,7 @@ int main()
 {
 	IMysqlOperate* p = GetFD();
 	p->ConnectDatabase();
+	p->InsertRecordData("测试", "测试", "测试", "测试", 5);
 }
 
 

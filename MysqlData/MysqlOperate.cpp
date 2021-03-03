@@ -2,6 +2,11 @@
 
 //查询数据库需要用数据
 
+using namespace std;
+
+
+char query[150]; //查询语句
+
 MysqlOperate::MysqlOperate()
 {
 
@@ -32,6 +37,22 @@ bool MysqlOperate::ConnectDatabase()
 	else
 	{
 		printf("Connected...\n");
+		return true;
+	}
+}
+
+bool MysqlOperate::InsertRecordData(string company, string ad, string time_bg, string time_ed, int times)
+{
+
+	sprintf(query, "insert into ad values('%s', '%s', '%s', '%s', %d);", company, ad, time_bg, time_ed, times);
+	if (mysql_query(&mysql, query))//执行SQL语句  
+	{
+		printf("Query failed (%s)\n", mysql_error(&mysql));
+		return false;
+	}
+	else
+	{
+		printf("Insert success\n");
 		return true;
 	}
 }
