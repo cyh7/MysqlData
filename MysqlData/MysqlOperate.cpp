@@ -43,13 +43,13 @@ bool MysqlOperate::ConnectDatabase()
 	}
 }
 
-////插入广告播放记录数据 公司名称 广告名称 开始时间 结束时间 播放次数
-bool MysqlOperate::InsertRecordData(string company, string ad, string time_bg, string time_ed, int times)
+////插入广告播放记录数据 年月日 公司名称 广告名称 开始时间 结束时间 播放次数
+bool MysqlOperate::InsertRecordData(string month, string company, string ad, string time_bg, string time_ed, int times)
 {
 	char query[1024];
 	//stringstream buf1;
 	//buf1 << "insert into ad values('" << company << "','测试','测试','测试','5')";
-	sprintf(query, "insert into ad values( '%s', '%s' , '%s' , '%s' , '%d') ", company.c_str(), ad.c_str(),time_bg.c_str(), time_ed.c_str(),times);
+	sprintf(query, "insert into ad values('%s', '%s', '%s' , '%s' , '%s' , '%d') ",month.c_str(), company.c_str(), ad.c_str(),time_bg.c_str(), time_ed.c_str(),times);
 	if (mysql_query(&mysql, query))//执行SQL语句  
 	{
 		printf("Query failed (%s)\n", mysql_error(&mysql));
@@ -98,8 +98,8 @@ void MysqlOperate::ExportAdExcel()
 {
 	char query[1024]; //查询语句
 	sprintf(query, "select * into outfile 'd:/test.csv' FIELDS TERMINATED BY ','" 
-		"from (select convert(('公司名称') using gbk),convert(('广告名称') using gbk),convert(('次数')using gbk),convert(('开始')using gbk),convert(('结束')using gbk)" 
-		"union select convert((公司名称) using gbk),convert((广告名称) using gbk),convert((播放次数)using gbk),convert((开始播放时间)using gbk),convert((结束播放时间)using gbk) from ad) b;");
+		"from (select convert(('日期') using gbk),select convert(('公司名称') using gbk),convert(('广告名称') using gbk),convert(('次数')using gbk),convert(('开始')using gbk),convert(('结束')using gbk)" 
+		"union select convert((日期) using gbk),convert((公司名称) using gbk),convert((广告名称) using gbk),convert((播放次数)using gbk),convert((开始播放时间)using gbk),convert((结束播放时间)using gbk) from ad) b;");
 	if (mysql_query(&mysql, query)) {        // 执行指定为一个空结尾的字符串的SQL查询。	
 		printf("Query failed (%s)\n", mysql_error(&mysql));
 	}

@@ -14,7 +14,7 @@ class IMysqlOperate
 {
 public:
 	virtual bool ConnectDatabase() = 0;
-	virtual bool InsertRecordData(std::string company, std::string ad, std::string time_bg, std::string time_ed, int times) = 0;
+	virtual bool InsertRecordData(std::string month,std::string company, std::string ad, std::string time_bg, std::string time_ed, int times) = 0;
 	virtual void FreeConnect() = 0;
 	virtual int QueryReqData(std::string company, std::string ad) = 0;
 	virtual void ExportAdExcel() = 0;
@@ -30,8 +30,8 @@ public:
 	//继承的实现
 	//连接数据库
 	bool ConnectDatabase();
-	//插入广告播放记录数据 公司名称 广告名称 开始时间 结束时间 播放次数
-	bool InsertRecordData(std::string company, std::string ad, std::string time_bg, std::string time_ed, int times);
+	//插入广告播放记录数据 年月日（格式： 2021-03-05） 公司名称 广告名称 开始时间 结束时间 播放次数
+	bool InsertRecordData(std::string month,std::string company, std::string ad, std::string time_bg, std::string time_ed, int times);
 	//在程序结束的时候请调用这个函数，释放资源
 	void FreeConnect();
 	//查询播放需求记录中的播放次数 参数为所要查询的公司名称以及参数名称
