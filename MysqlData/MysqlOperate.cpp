@@ -98,7 +98,7 @@ void MysqlOperate::ExportAdExcel()
 {
 	char query[1024]; //查询语句
 	sprintf(query, "select * into outfile 'd:/test.csv' FIELDS TERMINATED BY ','" 
-		"from (select convert(('日期') using gbk),select convert(('公司名称') using gbk),convert(('广告名称') using gbk),convert(('次数')using gbk),convert(('开始')using gbk),convert(('结束')using gbk)" 
+		"from (select convert(('日期') using gbk),convert(('公司名称') using gbk),convert(('广告名称') using gbk),convert(('次数')using gbk),convert(('开始')using gbk),convert(('结束')using gbk)" 
 		"union select convert((日期) using gbk),convert((公司名称) using gbk),convert((广告名称) using gbk),convert((播放次数)using gbk),convert((开始播放时间)using gbk),convert((结束播放时间)using gbk) from ad) b;");
 	if (mysql_query(&mysql, query)) {        // 执行指定为一个空结尾的字符串的SQL查询。	
 		printf("Query failed (%s)\n", mysql_error(&mysql));
